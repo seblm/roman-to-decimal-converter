@@ -5,12 +5,6 @@ public class RomanToDecimalConverter {
         if ("".equals(roman)) {
             return 0;
         }
-        if ("II".equals(roman)) {
-            return 2;
-        }
-        if ("III".equals(roman)) {
-            return 3;
-        }
-        return RomanNumber.valueOf(roman).decimalValue();
+        return roman.chars().map(character -> RomanNumber.valueOf(Character.toString((char) character)).decimalValue()).sum();
     }
 }
