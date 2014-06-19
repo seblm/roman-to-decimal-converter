@@ -27,4 +27,9 @@ public class RomanToDecimalConverterTest {
         assertThat(convert("II")).isEqualTo(2);
         assertThat(convert("III")).isEqualTo(3);
     }
+
+    @Test
+    public void should_convert_numerals_with_substraction() {
+        assertThat(convert("IV")).isEqualTo(4);
+    }
 }
