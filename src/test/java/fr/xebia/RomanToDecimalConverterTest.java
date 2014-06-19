@@ -28,6 +28,13 @@ public class RomanToDecimalConverterTest {
     }
 
     @Test
+    public void should_convert_three() {
+        int decimal = convert("III");
+
+        assertThat(decimal).isEqualTo(3);
+    }
+
+    @Test
     public void should_convert_five() {
         int decimal = convert("V");
 

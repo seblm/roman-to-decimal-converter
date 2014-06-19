@@ -8,6 +8,9 @@ public class RomanToDecimalConverter {
         if ("II".equals(roman)) {
             return 2;
         }
+        if ("III".equals(roman)) {
+            return 3;
+        }
         return RomanNumber.valueOf(roman).decimalValue();
     }
 }
