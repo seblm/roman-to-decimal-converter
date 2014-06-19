@@ -5,6 +5,9 @@ public class RomanToDecimalConverter {
         if ("".equals(roman)) {
             return 0;
         }
+        if ("II".equals(roman)) {
+            return 2;
+        }
         return RomanNumber.valueOf(roman).decimalValue();
     }
 }

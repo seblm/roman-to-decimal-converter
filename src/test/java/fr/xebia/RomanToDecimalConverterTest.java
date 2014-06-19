@@ -21,6 +21,13 @@ public class RomanToDecimalConverterTest {
     }
 
     @Test
+    public void should_convert_two() {
+        int decimal = convert("II");
+
+        assertThat(decimal).isEqualTo(2);
+    }
+
+    @Test
     public void should_convert_five() {
         int decimal = convert("V");
 
