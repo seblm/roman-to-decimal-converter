@@ -5,6 +5,9 @@ public class RomanToDecimalConverter {
         if ("I".equals(roman)) {
             return 1;
         }
+        if ("V".equals(roman)) {
+            return 5;
+        }
         return 0;
     }
 }

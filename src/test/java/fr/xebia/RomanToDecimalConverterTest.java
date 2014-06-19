@@ -19,4 +19,11 @@ public class RomanToDecimalConverterTest {
 
         assertThat(decimal).isEqualTo(1);
     }
+
+    @Test
+    public void should_convert_five() {
+        int decimal = convert("V");
+
+        assertThat(decimal).isEqualTo(5);
+    }
 }
