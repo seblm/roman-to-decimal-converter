@@ -1,5 +1,11 @@
 package fr.xebia;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import static java.util.Collections.emptySet;
+
 public enum RomanNumber {
     M(1000),
     D(500),
@@ -10,26 +16,25 @@ public enum RomanNumber {
     I(1, V, X);
 
     private final int decimalValue;
-    private final RomanNumber nextRomanNumbersImpliesSubstract;
-    private final RomanNumber otherNextRomanNumbersImpliesSubstract;
+    private final Set<RomanNumber> nextRomanNumbersImpliesSubstract;
 
     RomanNumber(int decimalValue) {
         this.decimalValue = decimalValue;
-        this.nextRomanNumbersImpliesSubstract = null;
-        this.otherNextRomanNumbersImpliesSubstract = null;
+        this.nextRomanNumbersImpliesSubstract = emptySet();
     }
 
-    RomanNumber(int decimalValue, RomanNumber nextRomanNumbersImpliesSubstract, RomanNumber otherNextRomanNumbersImpliesSubstract) {
+    RomanNumber(int decimalValue, RomanNumber firstRomanNumberImpliesSubstract, RomanNumber secondRomanNumberImpliesSubstract) {
         this.decimalValue = decimalValue;
-        this.nextRomanNumbersImpliesSubstract = nextRomanNumbersImpliesSubstract;
-        this.otherNextRomanNumbersImpliesSubstract = otherNextRomanNumbersImpliesSubstract;
+        this.nextRomanNumbersImpliesSubstract = new HashSet<>();
+        this.nextRomanNumbersImpliesSubstract.add(firstRomanNumberImpliesSubstract);
+        this.nextRomanNumbersImpliesSubstract.add(secondRomanNumberImpliesSubstract);
     }
 
     public int decimalValue() {
         return decimalValue;
     }
 
-    public boolean shouldBeSubstractedIfBefore(RomanNumber nextRomanNumber) {
-        return nextRomanNumber.equals(nextRomanNumbersImpliesSubstract) || nextRomanNumber.equals(otherNextRomanNumbersImpliesSubstract);
+    public boolean shouldBeSubstractedIfBefore(Optional<RomanNumber> nextRomanNumber) {
+        return nextRomanNumber.isPresent() && nextRomanNumbersImpliesSubstract.contains(nextRomanNumber.get());
     }
 }
