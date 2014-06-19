@@ -26,4 +26,39 @@ public class RomanToDecimalConverterTest {
 
         assertThat(decimal).isEqualTo(5);
     }
+
+    @Test
+    public void should_convert_ten() {
+        int decimal = convert("X");
+
+        assertThat(decimal).isEqualTo(10);
+    }
+
+    @Test
+    public void should_convert_fifty() {
+        int decimal = convert("L");
+
+        assertThat(decimal).isEqualTo(50);
+    }
+
+    @Test
+    public void should_convert_one_hundred() {
+        int decimal = convert("C");
+
+        assertThat(decimal).isEqualTo(100);
+    }
+
+    @Test
+    public void should_convert_five_hundred() {
+        int decimal = convert("D");
+
+        assertThat(decimal).isEqualTo(500);
+    }
+
+    @Test
+    public void should_convert_one_thousand() {
+        int decimal = convert("M");
+
+        assertThat(decimal).isEqualTo(1000);
+    }
 }
