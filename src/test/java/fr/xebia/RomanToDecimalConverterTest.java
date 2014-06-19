@@ -2,13 +2,21 @@ package fr.xebia;
 
 import org.junit.Test;
 
+import static fr.xebia.RomanToDecimalConverter.convert;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RomanToDecimalConverterTest {
     @Test
     public void should_convert_zero() {
-        int decimal = RomanToDecimalConverter.convert("");
+        int decimal = convert("");
 
         assertThat(decimal).isEqualTo(0);
+    }
+
+    @Test
+    public void should_convert_one() {
+        int decimal = convert("I");
+
+        assertThat(decimal).isEqualTo(1);
     }
 }
