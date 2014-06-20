@@ -32,16 +32,22 @@ public class RomanToDecimalConverter {
         Optional<RomanNumber> previousRomanNumber = empty();
         int consecutiveRomanNumbers = 0;
         for (RomanNumber romanNumber : romanNumbers) {
-            if (previousRomanNumber.isPresent()) {
-                consecutiveRomanNumbers = previousRomanNumber.get().equals(romanNumber) ? consecutiveRomanNumbers + 1 : 0;
-                if (consecutiveRomanNumbers >= 3) {
-                    throw new IllegalArgumentException();
-                }
-            }
+            consecutiveRomanNumbers = checkConsecutiveRomanNumbers(consecutiveRomanNumbers, previousRomanNumber, romanNumber);
             int sign = romanNumber.shouldBeSubstractedIfBefore(previousRomanNumber) ? -1 : 1;
             sum += sign * romanNumber.decimalValue();
             previousRomanNumber = of(romanNumber);
         }
         return sum;
+    }
+
+    private static int checkConsecutiveRomanNumbers(int consecutiveRomanNumbers, Optional<RomanNumber> previousRomanNumber, RomanNumber romanNumber) {
+        if (!previousRomanNumber.isPresent()) {
+            return 0;
+        }
+        int newConsecutiveRomanNumbers = previousRomanNumber.get().equals(romanNumber) ? consecutiveRomanNumbers + 1 : 0;
+        if (newConsecutiveRomanNumbers >= 3) {
+            throw new IllegalArgumentException();
+        }
+        return newConsecutiveRomanNumbers;
     }
 }
