@@ -7,24 +7,27 @@ import java.util.Set;
 import static java.util.Collections.emptySet;
 
 public enum RomanNumber {
-    M(1000),
-    D(500),
-    C(100, D, M),
-    L(50),
-    X(10, L, C),
-    V(5),
-    I(1, V, X);
+    M(1000, true),
+    D(500, false),
+    C(100, true, D, M),
+    L(50, false),
+    X(10, true, L, C),
+    V(5, false),
+    I(1, true, V, X);
 
     private final int decimalValue;
     private final Set<RomanNumber> nextRomanNumbersImpliesSubstract;
+    private final boolean shouldAdd;
 
-    RomanNumber(int decimalValue) {
+    RomanNumber(int decimalValue, boolean shouldAdd) {
+        this.shouldAdd = shouldAdd;
         this.decimalValue = decimalValue;
         this.nextRomanNumbersImpliesSubstract = emptySet();
     }
 
-    RomanNumber(int decimalValue, RomanNumber firstRomanNumberImpliesSubstract, RomanNumber secondRomanNumberImpliesSubstract) {
+    RomanNumber(int decimalValue, boolean shouldAdd, RomanNumber firstRomanNumberImpliesSubstract, RomanNumber secondRomanNumberImpliesSubstract) {
         this.decimalValue = decimalValue;
+        this.shouldAdd = shouldAdd;
         this.nextRomanNumbersImpliesSubstract = new HashSet<>();
         this.nextRomanNumbersImpliesSubstract.add(firstRomanNumberImpliesSubstract);
         this.nextRomanNumbersImpliesSubstract.add(secondRomanNumberImpliesSubstract);
@@ -36,5 +39,9 @@ public enum RomanNumber {
 
     public boolean shouldBeSubstractedIfBefore(Optional<RomanNumber> nextRomanNumber) {
         return nextRomanNumber.isPresent() && nextRomanNumbersImpliesSubstract.contains(nextRomanNumber.get());
+    }
+
+    public boolean shouldAdd() {
+        return shouldAdd;
     }
 }

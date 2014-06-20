@@ -40,11 +40,18 @@ public class RomanToDecimalConverter {
         return sum;
     }
 
-    private static int checkConsecutiveRomanNumbers(int consecutiveRomanNumbers, Optional<RomanNumber> previousRomanNumber, RomanNumber romanNumber) {
+    private static int checkConsecutiveRomanNumbers(int consecutiveRomanNumbers, Optional<RomanNumber> previousRomanNumber, RomanNumber romanNumber) throws IllegalArgumentException {
         if (!previousRomanNumber.isPresent()) {
             return 0;
         }
-        int newConsecutiveRomanNumbers = previousRomanNumber.get().equals(romanNumber) ? consecutiveRomanNumbers + 1 : 0;
+        boolean isConsecutive = previousRomanNumber.get().equals(romanNumber);
+        if (!isConsecutive) {
+            return 0;
+        }
+        if (!romanNumber.shouldAdd()) {
+            throw new IllegalArgumentException();
+        }
+        int newConsecutiveRomanNumbers = consecutiveRomanNumbers + 1;
         if (newConsecutiveRomanNumbers >= 3) {
             throw new IllegalArgumentException();
         }

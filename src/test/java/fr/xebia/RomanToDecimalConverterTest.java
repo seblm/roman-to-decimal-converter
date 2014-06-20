@@ -42,5 +42,15 @@ public class RomanToDecimalConverterTest {
     @Test(expected = IllegalArgumentException.class)
     public void should_not_add_more_than_tree_numerals() {
         convert("IIII");
+        convert("XXXX");
+        convert("CCCC");
+        convert("MMMM");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_not_add_numerals() {
+        convert("VV");
+        convert("LL");
+        convert("DD");
     }
 }
