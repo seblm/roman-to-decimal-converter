@@ -53,4 +53,10 @@ public class RomanToDecimalConverterTest {
         convert("LL");
         convert("DD");
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_not_substract_two_next_higher_value() {
+        convert("IL");
+        convert("XM");
+    }
 }

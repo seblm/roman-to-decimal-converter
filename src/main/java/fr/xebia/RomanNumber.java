@@ -38,7 +38,17 @@ public enum RomanNumber {
     }
 
     public boolean shouldBeSubstractedIfBefore(Optional<RomanNumber> nextRomanNumber) {
-        return nextRomanNumber.isPresent() && nextRomanNumbersImpliesSubstract.contains(nextRomanNumber.get());
+        if (!nextRomanNumber.isPresent()) {
+            return false;
+        }
+        if (decimalValue >= nextRomanNumber.get().decimalValue) {
+            return false;
+        }
+        boolean acceptToSubstract = nextRomanNumbersImpliesSubstract.contains(nextRomanNumber.get());
+        if (!acceptToSubstract) {
+            throw new IllegalArgumentException();
+        }
+        return true;
     }
 
     public boolean shouldAdd() {
