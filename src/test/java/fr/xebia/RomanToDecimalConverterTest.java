@@ -59,4 +59,9 @@ public class RomanToDecimalConverterTest {
         convert("IL");
         convert("XM");
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_not_substract_more_than_one_numeral() {
+        convert("XXC");
+    }
 }
