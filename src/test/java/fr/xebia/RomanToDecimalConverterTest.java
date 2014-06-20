@@ -38,4 +38,9 @@ public class RomanToDecimalConverterTest {
     public void should_convert_numerals_until_thousand() {
         assertThat(convert("MLXVI")).isEqualTo(1066);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_not_add_more_than_tree_numerals() {
+        convert("IIII");
+    }
 }

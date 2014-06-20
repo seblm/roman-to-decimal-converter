@@ -30,7 +30,14 @@ public class RomanToDecimalConverter {
     private static int convert(List<RomanNumber> romanNumbers) {
         int sum = 0;
         Optional<RomanNumber> previousRomanNumber = empty();
+        int consecutiveRomanNumbers = 0;
         for (RomanNumber romanNumber : romanNumbers) {
+            if (previousRomanNumber.isPresent()) {
+                consecutiveRomanNumbers = previousRomanNumber.get().equals(romanNumber) ? consecutiveRomanNumbers + 1 : 0;
+                if (consecutiveRomanNumbers >= 3) {
+                    throw new IllegalArgumentException();
+                }
+            }
             int sign = romanNumber.shouldBeSubstractedIfBefore(previousRomanNumber) ? -1 : 1;
             sum += sign * romanNumber.decimalValue();
             previousRomanNumber = of(romanNumber);
